@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get City Name</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+ body{
+    background-image:url(static/weather.jpg);
+    background-size:cover;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <form name="f1" action="/fetchweather" method="post">
+        <br>
+        <input type="text" name="city" placeholder="City" required/>
+       <br>
+        <br><input type="submit" value="fetch weather details" class="btn btn-info">
+    </form>
+</div>
+
+</body>
+</html>

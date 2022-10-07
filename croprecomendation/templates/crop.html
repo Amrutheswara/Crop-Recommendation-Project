@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop recomendation system</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+    header{
+    padding:20px;
+    font-size:50px;
+    font-family:TimesNewRoman;
+    text-align:center;
+    }
+
+    body{
+    background-image:url(static/farm1.jpg);
+    background-size:cover;
+    }
+
+</style>
+    <script src="static/jquery-3.6.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function(){
+        // alert("hello prends");
+
+         $("#check").hide();
+
+         $("#fetch").click(function(){
+
+         var city=$("#city").val();
+         if( city=="")
+         {
+         alert("enter city name");
+         return;
+         }
+         //AJAX request begins
+
+         $.get(
+         "/getweather",
+         {cty:city},
+         function(data)
+         {
+         res=$.parseJSON(data);
+         alert(res);
+         if(res["flag"]=="1")
+         {
+         $("#temp").val(res["temp"]);
+         $("#hum").val(res["hum"]);
+         $("#check").show();
+
+         }
+         else
+         {
+         alert("no info found");
+
+         }
+         }
+          );
+         }); // fetch click ends here
+         $("#f1").submit(function(){
+
+         //alert("you submitted form");
+
+         var d=$("#f1").serialize();
+         //alert(d);
+         $.ajax({
+         type:"post",
+         url:"/result",
+         data:d,
+         success:function(data){
+         //alert(data);
+
+         $("#msg").text(data);
+         $("#check").hide;
+
+         r="<img src='static/"+data+".jpg'/>"
+         $("#imgresult").html(r);
+         }
+         });
+
+        return false;
+
+         });
+         // submit event ends here
+    });
+    </script>
+</head>
+<body>
+<header class="bg-success text_white">
+
+        CROP RECOMENDATION SYSTEM
+
+</header>
+<br/>
+<div class="container col-md-6" style="border:3px solid green;">
+    <center>
+        <input type="text" id="city" name="city" placeholder="enter city name">
+        <input type="button" id="fetch" value="Fetch" class="btn-info btn-lg">
+    </center>
+</div>
+</br>
+<div class="container col-md-4" style="border:3px solid green">
+
+
+    <form name="f1" id="f1" action="/result" method="post">
+        <table class="table">
+            <tr>
+                <td>
+                    <input type="text" id="temp"  name="temp" readonly placeholder="Temperature" required/>
+                </td>
+            </tr>
+
+             <tr>
+                <td>
+                    <input type="text" id="hum"  name="humidity" readonly placeholder="Humidity" required/>
+                </td>
+            </tr>
+
+
+             <tr>
+                <td>
+                    <input type="submit" id="check" value="Check" class="btn-danger btn-lg" />
+                </td>
+
+            </tr>
+
+        </table>
+    </form>
+<h4 id="msg" class="text-danger"></h4>
+    <div id="imgresult">
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

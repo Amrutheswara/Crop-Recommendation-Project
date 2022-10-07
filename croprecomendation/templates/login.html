@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <style>
+    body{
+    background-image:url(static/farm1.jpg);
+    background-size:cover;
+    }
+</style>
+
+
+
+</head>
+<body src="static/farm1.jpg">
+<div class="container bg-info col-md-4">
+    <img src="static/log.png">
+    <form name="f1" action="/" method="post">
+<table class="table">
+    <tr>
+        <td>
+            <input type="text" name="username" placeholder="User Name" required/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <input type="password" name="password" placeholder="Password" required/>
+        </td>
+    </tr>
+    <tr>
+                <td>
+                    <input type="submit" value="Login" class="btn-danger btn-lg" />
+                </td>
+            </tr>
+
+</table>
+    </form>
+
+    {% if msg %}
+    <h4 class="text-danger">{{msg}}</h4>
+    {% endif %}
+</div>
+
+</body>
+</html>
